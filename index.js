@@ -8,11 +8,14 @@ const newCustomerTemplate = require('./emailTemplate'); // Adjust the path to wh
 const app = express();
 app.use(express.json());
 
-// Configure CORS to allow requests from specific origin
+// Configure CORS to allow requests from a specific origin
 const corsOptions = {
   origin: 'https://nex-gen-beta.vercel.app', // Replace with your frontend URL
-  optionsSuccessStatus: 200
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 204 // Some legacy browsers choke on 204
 };
+
 app.use(cors(corsOptions));
 
 const transporter = nodemailer.createTransport({
