@@ -1,9 +1,19 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const cors = require('cors'); // Import the cors middleware
 require('dotenv').config();
+
+const newCustomerTemplate = require('./emailTemplate'); // Adjust the path to where your template file is located
 
 const app = express();
 app.use(express.json());
+
+// Configure CORS to allow requests from specific origin
+const corsOptions = {
+  origin: 'https://nex-gen-beta.vercel.app', // Replace with your frontend URL
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -20,12 +30,7 @@ app.post('/api/contact', (req, res) => {
     from: process.env.EMAIL_USER,
     to: 'nexgen8898@gmail.com',
     subject: `New Customer: ${subject}`,
-    text: `
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Message: ${message}
-    `,
+    html: newCustomerTemplate(name, email, phone, subject, message),
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -37,7 +42,6 @@ app.post('/api/contact', (req, res) => {
       res.status(200).send('Email sent successfully');
     }
   });
-  
 });
 
 const PORT = process.env.PORT || 3000;
