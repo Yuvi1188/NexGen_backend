@@ -28,7 +28,7 @@ app.post('/api/contact', (req, res) => {
    console.log(name);
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: 'nexgen8898@gmail.com',
+    to: '2021uee1664@mnit.ac.in',
     subject: `New Customer: ${subject}`,
     html: newCustomerTemplate(name,email, phone, subject, message)
   };
