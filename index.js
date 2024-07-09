@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Configure CORS to allow requests from a specific origin
 const corsOptions = {
-  origin: 'https://nex-gen-beta.vercel.app', // Replace with your frontend URL
+  origin: '*', // Replace with your frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type'],
   optionsSuccessStatus: 204 // Some legacy browsers choke on 204
