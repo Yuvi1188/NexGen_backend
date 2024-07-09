@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors'); // Import the cors middleware
 require('dotenv').config();
 
-const newCustomerTemplate = require('./emailTemplate'); // Adjust the path to where your template file is located
+// const newCustomerTemplate = require('./emailTemplate'); // Adjust the path to where your template file is located
 
 const app = express();
 app.use(express.json());
@@ -11,9 +11,6 @@ app.use(express.json());
 // Configure CORS to allow requests from a specific origin
 const corsOptions = {
   origin: '*', // Replace with your frontend URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: ['Content-Type'],
-  optionsSuccessStatus: 204 // Some legacy browsers choke on 204
 };
 
 app.use(cors(corsOptions));
@@ -33,7 +30,7 @@ app.post('/api/contact', (req, res) => {
     from: process.env.EMAIL_USER,
     to: 'nexgen8898@gmail.com',
     subject: `New Customer: ${subject}`,
-    html: newCustomerTemplate(name, email, phone, subject, message),
+    html: "efef",
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
